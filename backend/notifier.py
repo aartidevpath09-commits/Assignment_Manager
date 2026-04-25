@@ -1,17 +1,37 @@
 import schedule
 import time
-from db import cursor
+from datetime import date, timedelta
+from db import get_connection
+from email_sender import send_email
 
-def check_due():
-    cursor.execute("SELECT * FROM assignments WHERE due_date = CURRENT_DATE")
-    data = cursor.fetchall()
+def check_due_dates():
+    conn = get_connection()
+    cur = conn.cursor()
 
-    for a in data:
-        print("Reminder: Assignment Due Today ->", a[1])
+    cur.execute("""
+    SELECT a.title, a.due_date, u.email
+    FROM assignments a
+    JOIN users u ON u.role='student'
+    """)
+    
+    rows = cur.fetchall()
+
+    today = date.today()
+
+    for title, due, email in rows:
+        if due == today:
+            send_email(
+                email,
+                "Assignment Due Today",
+                f"Your assignment '{title}' is due today!"
+            )
+
+    cur.close()
+    conn.close()
 
 def start_scheduler():
-    schedule.every().day.at("09:00").do(check_due)
+    schedule.every(1).minutes.do(check_due_dates)
 
     while True:
         schedule.run_pending()
-        time.sleep(60)
+        time.sleep(1)

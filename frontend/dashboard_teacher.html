@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="dashboard">
+
+<!-- 🔥 Navbar -->
+<div class="navbar">
+    <h2>Teacher Dashboard</h2>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<!-- 🔥 Stats -->
+<h3>Dashboard Stats</h3>
+
+<div class="grid">
+    <div class="assignment-card">
+        <h4>Total Assignments</h4>
+        <p id="totalCount">0</p>
+    </div>
+
+    <div class="assignment-card">
+        <h4>Due Today</h4>
+        <p id="dueToday">0</p>
+    </div>
+</div>
+
+<!-- 📊 Chart -->
+<canvas id="myChart" style="max-width:600px; margin-top:20px;"></canvas>
+
+<hr>
+
+<!-- 🔥 Add Assignment Card -->
+<h3>Add Assignment</h3>
+
+<div class="card">
+    <input type="text" id="title" placeholder="Title">
+    <input type="text" id="subject" placeholder="Subject">
+    <input type="date" id="dueDate">
+
+    <button onclick="addAssignment()">Add Assignment</button>
+</div>
+
+<!-- 🔥 Assignment List -->
+<h3>All Assignments</h3>
+<div id="assignmentList" class="grid"></div>
+
+<!-- 🔥 Submissions -->
+<h3>Student Submissions</h3>
+<div id="submissionList" class="grid"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
