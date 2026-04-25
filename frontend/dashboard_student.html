@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+
+    <!-- Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard">
+
+<!-- 🔥 Navbar -->
+<div class="navbar">
+    <h2>Student Dashboard</h2>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<!-- 🔥 Stats Section -->
+<h3>My Dashboard</h3>
+
+<div class="grid">
+    <div class="assignment-card">
+        <h3>Total Assignments</h3>
+        <p id="stuTotal">0</p>
+    </div>
+
+    <div class="assignment-card">
+        <h3>Due Today</h3>
+        <p id="stuDueToday">0</p>
+    </div>
+
+    <div class="assignment-card">
+        <h3>Upcoming</h3>
+        <p id="stuUpcoming">0</p>
+    </div>
+</div>
+
+<!-- 📊 Chart -->
+<div style="width: 400px; margin: 20px auto;">
+    <canvas id="studentChart"></canvas>
+</div>
+
+<hr>
+
+<!-- 🔔 Notifications -->
+<h3>Notifications 🔔</h3>
+<div id="notificationList" class="grid"></div>
+
+<hr>
+
+<!-- 📚 Assignment List -->
+<h3>Assignments</h3>
+<div id="assignmentList" class="grid"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

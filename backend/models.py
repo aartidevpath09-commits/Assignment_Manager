@@ -1,24 +1,35 @@
-from db import cursor, conn
+from db import get_connection
 
 def create_tables():
-    cursor.execute("""
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
     CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
-        name TEXT,
-        email TEXT UNIQUE,
+        username TEXT,
         password TEXT,
         role TEXT
-    );
+    )
     """)
 
-    cursor.execute("""
+    cur.execute("""
     CREATE TABLE IF NOT EXISTS assignments (
         id SERIAL PRIMARY KEY,
         title TEXT,
-        description TEXT,
-        due_date DATE,
-        created_by INT
-    );
+        subject TEXT,
+        due_date DATE
+    )
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS submissions (
+        id SERIAL PRIMARY KEY,
+        title TEXT,
+        submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
     """)
 
     conn.commit()
+    cur.close()
+    conn.close()
